@@ -1,0 +1,11 @@
+get http://localhost:3000/dev/cars
+
+post http://localhost:3000/dev/cars
+Content-Type: application/json
+
+{
+    "id" : "wq45dsf", 
+    "make" : "Honda", 
+    "model" : "accord",
+    "year" : 2019
+}
