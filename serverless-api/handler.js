@@ -1,64 +1,89 @@
+'use strict'
+
 const serverless = require('serverless-http');
-const express = require("express");
-const app = express();
 const AWS = require("aws-sdk");
 const db = new AWS.DynamoDB.DocumentClient();
 const { v4: uuidv4 } = require('uuid');
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+module.exports = {
 
-app.post("/cars", async (req, res) => {
-  const data = req.body;
-  const params = {
-    TableName: "todoTable",
-    Item: {
-      id: uuidv4(),
-      name: data.name
+    get: async(event, context) => {      
+        const params = {
+            TableName: "todoTable",
+          };
+        
+          const result = await db.scan(params).promise();
+          return {
+              statusCode: 200,
+              body: JSON.stringify({ cars: result} )
+          }
     },
-  };
 
-  try {
-    await db.put(params).promise();
-    res.status(201).json({ todo: params.Item });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-});
+    post: async(event, context) => {    
+        var data = event.body;
+        data = JSON.parse(data)
 
-app.get("/cars", async (req, res) => {
-  const params = {
-    TableName: "todoTable",
-  };
-
-  const result = await db.scan(params).promise();
-  res.status(200).json({ cars: result });
-});
-
-app.patch("/cars/:id", async (req, res) => {
-  const data = req.body;
-  const params = {
-    TableName: "todoTable",
-    Item: {
-      id: data.id,
-      name: data.name
+        const params = {
+            TableName: "todoTable",
+            Item: {
+                id: uuidv4(),
+                name: data.name
+              },
+          };
+        
+        try {
+            await db.put(params).promise();
+            return {
+                statusCode: 201,
+                body: JSON.stringify({todo: params.Item})
+            }
+        } catch (err) {
+            return {
+                statusCode: 500,
+                body: JSON.stringify({error: err.message})
+            }
+        }
     },
-  }
-  await db.put(params).promise();
-  res.status(200).json({ car: params.Item });
-});
 
-app.delete("/cars/:id", async (req, res) => {
-  const params = {
-    TableName: "todoTable",
-    Key: {
-      id: req.params.id
+    delete: async(event, context) => {  
+        const params = {
+            TableName: "todoTable",
+            Key: {
+                id: event.pathParameters.id
+            }
+          };
+        
+          await db.delete(params).promise();
+          return {
+              statusCode: 200,
+              body: JSON.stringify({ success: true} )
+          }
     },
-  };
 
-  await db.delete(params).promise();
-  res.status(200).json({ success: true });
+    update: async(event, context) => {  
+        var data = event.body;
+        data = JSON.parse(data)
 
-});
+        const params = {
+            TableName: "todoTable",
+            Item: {
+                id: event.pathParameters.id,
+                name: data.name
+            }
+          };
+        
+        try {
+            await db.put(params).promise();
+            return {
+                statusCode: 201,
+                body: JSON.stringify({todo: params.Item})
+            }
+        } catch (err) {
+            return {
+                statusCode: 500,
+                body: JSON.stringify({error: err.message})
+            }
+        }
+    },
 
-module.exports.app = serverless(app);
+}

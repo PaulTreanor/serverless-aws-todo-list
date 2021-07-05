@@ -16,25 +16,25 @@ provider:
 
 functions:
   get:
-    handler: betterHandler.get
+    handler: handler.get
     events:
       - http:
           path: /cars
           method: get
   post:
-    handler: betterHandler.post
+    handler: handler.post
     events:
       - http:
           path: /cars
           method: post
   delete:
-    handler: betterHandler.delete
+    handler: handler.delete
     events:
       - http:
           path: /cars/{id}
           method: delete
   update:
-    handler: betterHandler.update
+    handler: handler.update
     events:
       - http:
           path: /cars/{id}
