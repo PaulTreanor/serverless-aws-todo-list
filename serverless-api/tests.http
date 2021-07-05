@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "id" : "wq45dsf", 
-    "name" : "draw a picture"
+    "name" : "Get delete requests working"
 }
 
 #####
