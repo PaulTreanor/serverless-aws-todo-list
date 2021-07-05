@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h1 class="text-center pt-4 pb-3">Todo list</h1>
+    <h1 class="text-center pt-4 pb-3">Serverless todo list</h1>
     <InputBox v-on:new-item='updateList'/>
     <div class="itemarea" v-for="item in todoItems" :key="item.id">
       <ItemBox v-bind:itemDetails="item" v-on:delete-item="deleteItem"/>

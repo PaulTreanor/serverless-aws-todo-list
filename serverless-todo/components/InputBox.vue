@@ -1,7 +1,7 @@
 <template>
   <b-card class="boxy">
     <b-row>
-        <form class="d-flex" v-on:submit.prevent="addNewItem">
+        <form class="d-flex formy" v-on:submit.prevent="addNewItem">
             <b-col>
                 <input v-model ="tempNewItem" type="text" id="item" name="item" required maxlength="100" size="35" placeholder="Deploy a serverless app">
             </b-col>
@@ -13,6 +13,7 @@
                 </b-button>
             </b-col>
             </b-col>
+            
         </form>
     </b-row>
   </b-card>
@@ -79,5 +80,9 @@ export default {
 .addButton:active {
     background-color: lightgreen;
 
+}
+
+.formy {
+    width: 100%;
 }
 </style>
