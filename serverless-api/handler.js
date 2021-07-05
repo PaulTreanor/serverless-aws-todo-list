@@ -41,9 +41,7 @@ app.patch("/cars/:id", async (req, res) => {
     TableName: "todoTable",
     Item: {
       id: data.id,
-      make: data.make,
-      model: data.model,
-      year: data.year
+      name: data.name
     },
   }
   await db.put(params).promise();

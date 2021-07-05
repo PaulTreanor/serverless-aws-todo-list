@@ -1,12 +1,17 @@
 <template>
   <b-card class="boxy">
     <b-row>
-        <form  v-on:submit.prevent="addNewItem">
+        <form class="d-flex" v-on:submit.prevent="addNewItem">
             <b-col>
                 <input v-model ="tempNewItem" type="text" id="item" name="item" required maxlength="100" size="35" placeholder="Deploy a serverless app">
             </b-col>
             <b-col>
-                <button type="submit" class="btn btn-primary mt-3">Add</button>  
+                <b-col class="d-flex justify-content-end">
+
+                <b-button type="submit" class="addButton">
+                    add item 
+                </b-button>
+            </b-col>
             </b-col>
         </form>
     </b-row>
@@ -61,3 +66,18 @@ export default {
 </script>
 
 
+<style scoped>
+.addButton {
+    background-color: green;
+    border-color: darkgreen;
+}
+
+.addButton:hover {
+    background-color: darkgreen;
+}
+
+.addButton:active {
+    background-color: lightgreen;
+
+}
+</style>
