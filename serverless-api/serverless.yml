@@ -15,10 +15,33 @@ provider:
   lambdaHashingVersion: 20201221
 
 functions:
-  app:
-    handler: handler.app
+  get:
+    handler: handler.get
     events:
-      - http: any {proxy+}
+      - http:
+          path: /cars
+          method: get
+  post:
+    handler: handler.post
+    events:
+      - http:
+          path: /cars
+          method: post
+  delete:
+    handler: handler.delete
+    events:
+      - http:
+          path: /cars/{id}
+          method: delete
+  update:
+    handler: handler.update
+    events:
+      - http:
+          path: /cars/{id}
+          method: patch
+
+
+
 resources:
   Resources:
     todoTable:

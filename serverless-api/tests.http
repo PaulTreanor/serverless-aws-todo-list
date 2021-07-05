@@ -12,15 +12,15 @@ Content-Type: application/json
 
 #####
 
-delete http://localhost:3000/dev/cars/0254ea6c-7f21-4412-ba46-3df710ce7354
+delete http://localhost:3000/dev/cars/692abd9a-5295-4f57-95f4-b6fa37380487
 
 #####
 
-patch http://localhost:3000/dev/cars/0254ea6c-7f21-4412-ba46-3df710ce7354
+patch http://localhost:3000/dev/cars/86d856d8-4f00-47bb-87d5-94e5c8555ef6
 Content-Type: application/json
 
 {
     "id" : "0254ea6c-7f21-4412-ba46-3df710ce7354", 
-    "name" : "Fix delete requests"
+    "name" : "Implement API endpoints in yaml"
 }
 
