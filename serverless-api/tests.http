@@ -1,11 +1,15 @@
 get http://localhost:3000/dev/cars
 
+#####
+
 post http://localhost:3000/dev/cars
 Content-Type: application/json
 
 {
     "id" : "wq45dsf", 
-    "make" : "Honda", 
-    "model" : "accord",
-    "year" : 2019
+    "name" : "draw a picture"
 }
+
+#####
+
+delete http://localhost:3000/dev/cars/e6c66a31-fa50-41ec-b9ea-16e1704b2361"

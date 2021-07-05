@@ -24,7 +24,8 @@ export default {
     data () {
         return {
             uuid: uuid.v1(),
-            tempNewItem: ""
+            tempNewItem: "",
+            url: "http://localhost:3000/dev/cars"
         }
     },
 
@@ -38,15 +39,15 @@ export default {
                 name: this.tempNewItem
             }
             // make POST request
-            // postNewItem
+            this.postNewItem(newItem);
  
             // add it to local list
             this.$emit('new-item', newItem);
             this.tempNewItem = "";
         },
 
-        async postNewItem(url, item) {       // POST request to dynamoDB
-            await fetch(url, {
+        async postNewItem(item) {       // POST request to dynamoDB
+            await fetch(this.url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

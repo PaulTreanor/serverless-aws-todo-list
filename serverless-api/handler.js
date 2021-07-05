@@ -15,15 +15,13 @@ app.post("/cars", async (req, res) => {
     TableName: "todoTable",
     Item: {
       id: uuidv4(),
-      make: data.make,
-      model: data.model,
-      year: data.year
+      name: data.name
     },
   };
 
   try {
     await db.put(params).promise();
-    res.status(201).json({ car: params.Item });
+    res.status(201).json({ todo: params.Item });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

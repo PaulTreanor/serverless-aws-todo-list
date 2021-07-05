@@ -12,7 +12,8 @@
 export default {
   data () {
     return {
-      todoItems: []
+      todoItems: [],
+      url: "http://localhost:3000/dev/cars"
     }
   },
   created() {
@@ -22,26 +23,11 @@ export default {
   methods: {
 
     getItemsFromDB() {
-      this.todoItems = [
-        {
-          id: 1234, 
-          name: "do the dishes"
-        },
-        {
-          id: 1235, 
-          name: "deploy a serverless app"
-        },
-        {
-          id: 1236, 
-          name: "continue using Vim"
-        }
-      ]
-    },
-
-    addNewItem(newItem) {
-      // add item to list 
-      this.todoItems.push(newItem)
-      console.log(this.todoItems)
+      fetch(this.url)
+      .then(response => response.json())
+      .then(data => {
+        this.todoItems = data.cars.Items
+      });
     },
 
     deleteItem(itemId) {
