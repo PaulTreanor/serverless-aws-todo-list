@@ -1,7 +1,7 @@
 <template>
   <b-container>
-    <h1>Todo list</h1>
-    <InputBox v-on:new-item='addNewItem'/>
+    <h1 class="text-center pt-4 pb-3">Serverless todo list</h1>
+    <InputBox v-on:new-item='updateList'/>
     <div class="itemarea" v-for="item in todoItems" :key="item.id">
       <ItemBox v-bind:itemDetails="item" v-on:delete-item="deleteItem"/>
     </div>
@@ -22,6 +22,11 @@ export default {
 
   methods: {
 
+    updateList() {
+      // account for DB update time, then update local list 
+      setTimeout( this.getItemsFromDB, 2000);
+    },
+
     getItemsFromDB() {
       fetch(this.url)
       .then(response => response.json())
@@ -32,10 +37,11 @@ export default {
 
     deleteItem(itemId) {
       this.todoItems = this.todoItems.filter(item => item.id !== itemId)
-      console.log(this.todoItems)
-
-      // delete item in DB 
-      fetch('url/delete/id')
+      var deleteURL = this.url + "/" + itemId;
+     
+      fetch(deleteURL, {
+        method: 'DELETE',
+      })
       .then(response => response.json())
       .then(data => console.log(data));
     }

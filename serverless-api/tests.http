@@ -7,9 +7,20 @@ Content-Type: application/json
 
 {
     "id" : "wq45dsf", 
-    "name" : "draw a picture"
+    "name" : "Get delete requests working"
 }
 
 #####
 
-delete http://localhost:3000/dev/cars/e6c66a31-fa50-41ec-b9ea-16e1704b2361"
+delete http://localhost:3000/dev/cars/0254ea6c-7f21-4412-ba46-3df710ce7354
+
+#####
+
+patch http://localhost:3000/dev/cars/0254ea6c-7f21-4412-ba46-3df710ce7354
+Content-Type: application/json
+
+{
+    "id" : "0254ea6c-7f21-4412-ba46-3df710ce7354", 
+    "name" : "Fix delete requests"
+}
+
